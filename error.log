@@ -1,0 +1,10 @@
+
+>  NX  Generating @nrwl/nx-cloud:init
+
+
+ >  NX   socket hang up
+
+   Pass --verbose to see the stacktrace.
+
+
+npm WARN config global `--global`, `--local` are deprecated. Use `--location=global` instead.
