@@ -1,11 +1,8 @@
-import { theme } from "apps/karmine-client/src/assets/theme"
+import { makeStyles } from 'tss-react/mui';
 
-export const useStyles = () => {
+const useStyles = makeStyles()((theme) => {
   return {
-    background: {
-      backgroundColor: theme().background,
-      with: '100vw',
-      height: '100vh'
-    }
-  }
-}
+    
+  };
+});
+export default useStyles;
