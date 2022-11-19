@@ -7,7 +7,6 @@ import CssBaseline from '@mui/material/CssBaseline';
 
 export function App() {
   return (
-  <>
     <ThemeProvider theme={theme}>
       <CssBaseline />
       <Routes>
@@ -22,8 +21,8 @@ export function App() {
           }
         />
       </Routes>
-    </ThemeProvider>;
-  </>);
+    </ThemeProvider>
+  );
 
 }
 

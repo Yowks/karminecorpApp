@@ -1,19 +1,25 @@
-import { useEffect, useState } from "react"
+import { useEffect, useMemo, useState } from "react"
+import Events from "../../models/interfaces/events"
 import { getEvents } from "../../services/events"
-import { useStyles } from "./styles"
+import { Matches } from "../matches"
+import useStyles from "./styles";
 
 export const Layout = () => {
-  const { test } = useStyles()
-  const [value, setValue] = useState('')
+  const {classes} = useStyles()
+  const [events, setEvents] = useState<Events[]>([])
+
 	useEffect(() => {
     const fetchData = async () => {
-      setValue(await getEvents())
+      setEvents(await getEvents());
     }
     fetchData()
-  }, [value])
+  }, [])
+  
   return (
-    <>
-    {value}
-    </>   
+    <div className={classes.container} style={{color: "white"}}>
+      {events.length>0 && events.map((value, index) => {
+        return <Matches {...value}/>
+      })}
+    </div>
   )
 }

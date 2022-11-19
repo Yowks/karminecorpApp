@@ -3,6 +3,7 @@ import { makeStyles } from 'tss-react/mui';
 const useStyles = makeStyles()((theme) => {
   return {
     footerContainer: {
+      background: theme.palette.background.default,
       borderTop: `4px solid ${theme.palette.primary.main}`,
       height : '10vh',
       width: '100vw',

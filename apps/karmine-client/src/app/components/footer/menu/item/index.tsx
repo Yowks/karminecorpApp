@@ -4,7 +4,7 @@ import FeedIcon from '@mui/icons-material/Feed';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import { Navigation } from "../../../../hooks/navigation";
 import useStyles from "./styles";
-import Pages from "../../../../interfaces/pages";
+import Pages from "../../../../models/enums/pages";
 
 interface Props{
   page: Pages

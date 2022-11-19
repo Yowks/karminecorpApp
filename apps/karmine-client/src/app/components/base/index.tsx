@@ -8,7 +8,7 @@ export const Base = () => {
   return (
     <div>
       <Header />
-      <Layout></Layout>
+      <Layout />
       <Footer />
     </div>
   )

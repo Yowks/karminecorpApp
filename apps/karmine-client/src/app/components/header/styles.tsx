@@ -3,6 +3,7 @@ import { makeStyles } from 'tss-react/mui';
 const useStyles = makeStyles()((theme) => {
   return {
     headerContainer: {
+      background: theme.palette.background.default,
       borderBottom: `4px solid ${theme.palette.primary.main}`,
       height : '10vh',
       width: '100vw',

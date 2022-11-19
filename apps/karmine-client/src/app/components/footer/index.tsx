@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Navigation } from "../../hooks/navigation";
-import Pages from "../../interfaces/pages";
+import Pages from "../../models/enums/pages";
 import { Menu } from "./menu";
 import useStyles from "./styles";
 
