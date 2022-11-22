@@ -6,7 +6,8 @@
     "test": "npx nx run-many --all --target=test --parallel",
     "lint": "nx workspace-lint && npx nx run-many --all --target=lint --parallel",
     "start:client": "nx run karmine-client:serve",
-    "start:service": "nx run karmine-service:serve"
+    "start:service": "nx run karmine-service:serve",
+    "start:proxy": "nx run karmine-proxy-server:serve"
   },
   "private": true,
   "repository": {
@@ -45,7 +46,11 @@
     "rxjs": "^7.0.0",
     "tslib": "^2.3.0",
     "tss-react": "^4.4.4",
-    "typeorm": "^0.3.10"
+    "typeorm": "^0.3.10",
+    "agentkeepalive": "^4.2.1",
+    "express": "^4.18.1",
+    "got": "^11",
+    "iconv-lite": "^0.6.3"
   },
   "devDependencies": {
     "@nestjs/schematics": "^9.0.0",
@@ -55,7 +60,7 @@
     "@nrwl/jest": "15.0.13",
     "@nrwl/linter": "15.0.13",
     "@nrwl/nest": "15.0.13",
-    "@nrwl/node": "15.0.13",
+    "@nrwl/node": "^15.0.13",
     "@nrwl/nx-cloud": "latest",
     "@nrwl/react": "15.0.13",
     "@nrwl/web": "15.0.13",
@@ -82,7 +87,9 @@
     "prettier": "^2.6.2",
     "react-test-renderer": "18.2.0",
     "ts-jest": "28.0.5",
-    "ts-node": "10.9.1"
+    "ts-node": "10.9.1",
+    "nock": "^13.2.9",
+    "supertest": "^6.2.4"
   },
   "workspaces": [
     "apps/*"
