@@ -10,8 +10,9 @@ function isToday(date: Date):boolean {
 }
 
 export const EventDate: React.FC<{date: string}> = ({date}) => {
-  const {classes} = useStyles()
-	const dateObject = new Date(date);
+  const { classes } = useStyles();
+  const dateSplited = date.split('/');
+  const dateObject = new Date(~~dateSplited[2], ~~dateSplited[1]-1, ~~dateSplited[0]);
   return (
     <div className={classes.container}>
       <span className={classes.date}>

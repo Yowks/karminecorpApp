@@ -1,22 +1,23 @@
 import axios from 'axios';
 import * as cheerio from 'cheerio';
+import { format } from 'date-fns';
 import Events from '../models/interfaces/events';
 
 let actualGame = '';
+const objectEvents = Object.create(null);
 
 function formatValues(value: string): string{
   return value.replace(/(\r\n|\n|\r)/gm, "");
 }
 
-function searchData($: cheerio.CheerioAPI): Events[] {
+function searchData($: cheerio.CheerioAPI) {
   const team1 = $('.team-1 .name');
   const team2 = $('.team-2');
   const tournament = $('.event')
   const upcomingMatchesDetails = $('time');
-  const matches: Events[] = [];
 
   if(team1.length === 0) {
-    return matches;
+    return objectEvents;
   }
 
   for(let i=0; i<team1.length; i++){
@@ -26,6 +27,16 @@ function searchData($: cheerio.CheerioAPI): Events[] {
       date = '2022'
     }
 
+    const dateDayMonthYear = format(new Date(date), 'dd/MM/yyyy');
+    
+    if(objectEvents[dateDayMonthYear] === undefined) {
+      objectEvents[dateDayMonthYear] = []
+    }
+
+    if(objectEvents[dateDayMonthYear][actualGame] === undefined) {
+      objectEvents[dateDayMonthYear][actualGame] = []
+    }
+
     const event: Events = {
       team: formatValues($(team1[i]).text()),
       game: actualGame,
@@ -33,15 +44,22 @@ function searchData($: cheerio.CheerioAPI): Events[] {
       opponent: formatValues($(team2[i]).text()),
       tournament: formatValues($(tournament[i]).text()),
     }
-    matches.push(event)
+    objectEvents[dateDayMonthYear][actualGame].push(event);
+    objectEvents[dateDayMonthYear][actualGame].sort(function(a: Events,b: Events){
+      return new Date(a.date).getTime() - new Date(b.date).getTime()
+    });
   }
-  return matches;
+  return objectEvents;
 }
 
 export const getEvents = async () => {
-  const urls = ["https://www.gosugamers.net/dota2/teams/3303-anonymous-esports","https://www.gosugamers.net/counterstrike/teams/43672-heet"];
-  const data : Events[] = [];
-  urls.forEach( async (requestURL) => {
+  const urls = [
+    "https://www.gosugamers.net/dota2/teams/3303-anonymous-esports",
+    "https://www.gosugamers.net/counterstrike/teams/43672-heet", 
+    "https://www.gosugamers.net/lol/teams/32677-kawaii-kiwis"
+  ];
+
+  for(const requestURL of urls) {
     const allMatches = await axios.get(`http://localhost:1458/get?url=${encodeURIComponent(requestURL)}`)
     .then(response => {
       if (response.status === 200) return response;
@@ -50,11 +68,8 @@ export const getEvents = async () => {
     actualGame = requestURL.split('/')[3]
 
     const html = cheerio.load(allMatches.data.contents);
-    console.log(await searchData(html))
-    Array.prototype.push.apply(data,await searchData(html))
-  });
+    await searchData(html);
+  };
 
-  console.log('data', data)
-  
-  return data;
+  return objectEvents;
 }

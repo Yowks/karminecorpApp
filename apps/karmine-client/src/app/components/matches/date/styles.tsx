@@ -4,7 +4,6 @@ const useStyles = makeStyles()((theme) => {
   return {
     container: {
       maxWidth: '680px',
-      margin: "0 auto",
       padding: "0 15px"
     },
     date: {

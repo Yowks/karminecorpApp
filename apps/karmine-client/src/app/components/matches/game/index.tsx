@@ -4,9 +4,8 @@ import counterstrike from "../../../public/counterstrike.svg"
 import dota2 from "../../../public/dota2.svg"
 import lol from "../../../public/lol.svg"
 import valorant from "../../../public/valorant.svg"
-import Events from "../../../models/interfaces/events";
 
-export const Game: React.FC<Events> = (event) => {
+export const Game: React.FC<{game: string}> = ({game}) => {
   const {classes} = useStyles()
   let gameName= '';
   const renderSwitch = (game: string) => {
@@ -32,10 +31,9 @@ export const Game: React.FC<Events> = (event) => {
     <div className={classes.gameBar}>
       <div className={classes.container}>
         <div className={classes.gameInfo}>
-          {renderSwitch(event.game)}
+          {renderSwitch(game)}
           <span className={classes.gameName}>{gameName}</span>
         </div>
-        <span className={classes.tournamentInfo}>{event.tournament}</span>
       </div>
     </div>  
   )
