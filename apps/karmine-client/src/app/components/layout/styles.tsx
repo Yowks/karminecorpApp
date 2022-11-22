@@ -1,7 +1,14 @@
-export const useStyles = () => {
+import { makeStyles } from 'tss-react/mui';
+
+const useStyles = makeStyles()((theme) => {
   return {
-    test: {
-      background: 'red'
+    container: {
+      padding: 'calc(10vh + 4px) 0',
+      display: 'flex',
+      flexDirection: 'column',
+      justifyContent: 'center',
+      margin: "0 auto"
     }
-  }
-}
+  };
+});
+export default useStyles;
